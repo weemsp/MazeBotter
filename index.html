@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
+		<meta name="viewport" content="width=device-width">
+		<title>Maze Botter</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		
+		<script type="text/javascript" src="maze.js"></script>
+		<script type="text/javascript" src="levels.js"></script>
+		<script type="text/javascript" src="interpreter.js"></script>
+		
+	</head>
+	<body id="Body">
+		<div id="MazeBox">
+			<canvas id="MazeCanvas" width="360px" height="360px">Your browser requires Canvas support to play this game.</canvas>
+		</div>
+		<p id="InstructionsHere">Instructions go here.</p>
+		<p id="ErrorHere" hidden>Error message goes here.</p>
+		<button id="RunButton" onclick="runCode()">Run</button>
+		<button id="HaltButton" onclick="haltExecution()">Halt</button>
+		<button id="ResetButton" onclick="haltExecution();reset();">Reset</button>
+		<div id="CodeArea">
+			<canvas id="CodeCanvas" width="100px" height="400px"></canvas>
+			<textarea id="CodeInput"></textarea>
+		</div>
+		
+		<script>
+			var codeInput = document.getElementById("CodeInput");
+			var codeCanvas = document.getElementById("CodeCanvas");
+			var codeCtx = codeCanvas.getContext("2d");
+			var runButton = document.getElementById("RunButton");
+			var mazeCanvas = document.getElementById("MazeCanvas");
+			var mazeCtx = mazeCanvas.getContext("2d");
+			var instructionsHere = document.getElementById("InstructionsHere");
+			var errorHere = document.getElementById("ErrorHere");
+			//runButton.onclick = "runCode()";
+			levelIndex = 0;
+			//codeInput.onresize = "redrawCodeCanvas();console.log('bup');";
+			/*$("CodeInput").resizable({
+				resize: redrawCodeCanvas,
+			});*/
+			loadLevel(0);
+		</script>
+	</body>
+</html>
