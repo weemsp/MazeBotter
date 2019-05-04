@@ -4,6 +4,7 @@ var lines = [];
 var lastLine;
 var nextLine;
 var runDelay = 500;
+var maxLines
 /*
 move : moves one space forward
 turn-left : turns 90 degrees to the left
@@ -44,10 +45,36 @@ const LINE_GETS = {
 				currentD += 4;
 		}
 	},
+	"goto" : function(arg0) {
+		var toline = parseInt(arg0);
+		return function() {
+			nextLine = toline;
+		}
+	},
+	"jump" : function(arg0) {
+		var diff = parseInt(arg0);
+		return function() {
+			nextLine = lastLine + diff;
+		}
+	},
+	"if-wall" : function() {
+		return function() {
+			if (!isWall(currentX, currentY, currentD))
+				nextLine = lastLine + 2;
+		}
+	},
+	"if-clear" : function() {
+		return function() {
+			if (isWall(currentX, currentY, currentD))
+				nextLine = lastLine + 2;
+		}
+	},
 }
 
 function interpret(input) {
 	var textlines = input.split("\n");
+	if (textlines.length > maxLines)
+		throw "Problem must be completed in "+maxLines+" or fewer.";
 	lines = [];
 	textlines.forEach(function(line, dex) {
 		var words = line.split(" ");
@@ -76,7 +103,7 @@ function runCode() {
 		errorHere.hidden = false;
 		return;
 	}
-	console.log(lines);
+	//console.log(lines);
 	nextLine = 0;
 	failed = false;
 	reset();
@@ -86,7 +113,7 @@ function runCode() {
 function runNext() {
 	lastLine = nextLine;
 	nextLine = null;
-	console.log(lines[lastLine]);
+	//console.log(lines[lastLine]);
 	lines[lastLine]();
 	if (nextLine == null) {
 		nextLine = lastLine + 1;

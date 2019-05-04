@@ -14,16 +14,17 @@
 		
 	</head>
 	<body id="Body">
+		<h2 id="TitleHere">TOP TEXT</h2>
+		<p id="InstructionsHere">Instructions go here.</p>
 		<div id="MazeBox">
 			<canvas id="MazeCanvas" width="360px" height="360px">Your browser requires Canvas support to play this game.</canvas>
 		</div>
-		<p id="InstructionsHere">Instructions go here.</p>
-		<p id="ErrorHere" hidden>Error message goes here.</p>
-		<button id="RunButton" onclick="runCode()">Run</button>
-		<button id="HaltButton" onclick="haltExecution()">Halt</button>
-		<button id="ResetButton" onclick="haltExecution();reset();">Reset</button>
 		<div id="CodeArea">
-			<canvas id="CodeCanvas" width="100px" height="400px"></canvas>
+			<button id="RunButton" onclick="runCode()">Run</button>
+			<button id="HaltButton" onclick="haltExecution()">Halt</button>
+			<button id="ResetButton" onclick="haltExecution();reset();">Reset</button>
+			<p id="ErrorHere" hidden>Error message goes here.</p>
+			<canvas id="CodeCanvas" width="50px" height="400px"></canvas>
 			<textarea id="CodeInput"></textarea>
 		</div>
 		
@@ -34,6 +35,7 @@
 			var runButton = document.getElementById("RunButton");
 			var mazeCanvas = document.getElementById("MazeCanvas");
 			var mazeCtx = mazeCanvas.getContext("2d");
+			var titleHere = document.getElementById("TitleHere");
 			var instructionsHere = document.getElementById("InstructionsHere");
 			var errorHere = document.getElementById("ErrorHere");
 			//runButton.onclick = "runCode()";
